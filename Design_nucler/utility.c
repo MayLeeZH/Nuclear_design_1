@@ -1,5 +1,3 @@
-// #include "system_parameter.h"
-
 // 该函数有些冗杂，需要优化，并且有漏洞
 void checkinput_outT(void)
 {
@@ -15,7 +13,7 @@ void checkinput_outT(void)
 void checkinput_out_CVT(int n_CV)
 {
     printf("假设%d控制体出口温度:\n", n_CV + 1);
-    while ((scanf("%lf", &t_out_CV[n_CV]) != 1) || (t_out_CV[n_CV] < 270 || t_out_CV[n_CV] > 330))
+    while ((scanf("%lf", &t_f_h[n_CV]) != 1) || (t_f_h[n_CV] < 270 || t_f_h[n_CV] > 350))
     {
         printf("温度不符合，请重新输入:");
         fflush(stdin);
@@ -36,12 +34,13 @@ void output_info(void)
     for (int n_CV = 0; n_CV < s_CV; n_CV++)
     {
         printf("\n");
-        printf("----------------第%d控制体输出-----------------\n",n_CV);
+        printf("----------------第%d控制体输出-----------------\n",n_CV+1);
 
-        printf("第%d控制体出口流温度%lf\n", n_CV + 1, t_out_CV[n_CV]);
-        printf("第%d控制体出处的包壳外壁温%lf\n", n_CV + 1, t_cs_h[n_CV]);
-        printf("第%d控制体出处的包壳内壁温%lf\n", n_CV + 1, t_ci_h[n_CV]);
-        printf("第%d控制体出处的UO2芯快外表面温度%lf\n", n_CV + 1, t_u_h[n_CV]);
+        printf("第%d控制体出口流温度%lf\n", n_CV + 1, t_f_h[n_CV]);
+        printf("第%d控制体出口处的包壳外壁温%lf\n", n_CV + 1, t_cs_h[n_CV]);
+        printf("第%d控制体出口处的包壳内壁温%lf\n", n_CV + 1, t_ci_h[n_CV]);
+        printf("第%d控制体出口处的UO2芯快外表面温度%lf\n", n_CV + 1, t_u_h[n_CV]);
+        printf("第%d控制体出口处的UO2芯快内表面温度%lf\n", n_CV + 1, t_o_h[n_CV]);
         printf("--------------------------------------------\n");
 
     }

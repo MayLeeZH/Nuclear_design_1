@@ -19,15 +19,24 @@ double A_b = 0; // 单元通道面积 m2
 double W_h = 0; // 单元通道内流量 kg/s
 
 //sec_4 中使用
-double φ[] = {0.80,1.50,0.70,0.96,0.48,1.56};
+double φ[] = {0.80,1.02,1.50,1.56,0.96,0.48};
 double D_e = 0 ; //当量直径
 
 
 
-double t_out_CV[6] = { 0, 0 ,0 ,0 ,0 ,0};
+double t_f_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
 double t_cs_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
 double t_ci_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
 double t_u_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
+double t_o_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
 
 
 double G = 0; //质量流密度   = 密度 * 流速
+double hg = 5678;
+
+#define LIM 2
+#define NUM 651
+double data[NUM][LIM];
+
+#define NUM_2 23
+double data_UO2[NUM_2][LIM];

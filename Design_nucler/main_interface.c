@@ -4,6 +4,7 @@
 #include "math.h"
 #include "system_parameter.h"
 #include "sec_0_define.h"
+#include "data_finder.c"
 #include "utility.c"
 #include "sec_1_outlet_temperature.c"
 #include "sec_2_fuel_rod.c"
@@ -16,14 +17,12 @@
 
 int main(void)
 {
-
-
     printf("--------------------------压水核反应堆热工水力设计-----------------------------\n");
     printf("作者: 李正浩\t");
     puts(VERSION);
     printf("-Waiting-\n");
-
-     
+    import_data_C_p();   
+    import_data_UO2();
     outlet_TEMP();
     fuel_serface_info();
     pipe_info();
@@ -32,8 +31,7 @@ int main(void)
     {
         CV_info(n_CV);
     }
-    
-    
+
     output_info();
 
 

@@ -3,7 +3,8 @@
 void outlet_T_CV(int);
 void out_cladding_T(int);
 void in_cladding_T(int);
-void out_UO2_T(int);
+void outside_UO2_T(int);
+void inside_UO2_T(int);
 
 void  CV_info(int n_CV)
 {
@@ -11,7 +12,8 @@ void  CV_info(int n_CV)
     outlet_T_CV(n_CV);
     out_cladding_T(n_CV);
     in_cladding_T(n_CV);
-    out_UO2_T(n_CV);
+    outside_UO2_T(n_CV);
+    inside_UO2_T(n_CV);
 }
 
 // 用迭代法求控制体的出口温度
@@ -27,11 +29,11 @@ void outlet_T_CV(int n_CV)
     checkinput_out_CVT(n_CV);
     do
     {
-        f_avg = f_in + t_out_CV[n_CV];
-        C_p = 1000 * (0.04006 * (f_avg - 310) + 5.7437);
-        f_temp = f_in + ((q_ave * F_N_R * F_E_dH * F_E_dhm * L / 6 * φ[n_CV] * Pi * d_cs) / (W_h * C_p));
-        err = (t_out_CV[n_CV] - f_temp) / t_out_CV[n_CV];
-        t_out_CV[n_CV] = f_temp;
+        f_avg = (f_in + t_f_h[n_CV])/2;
+        C_p = find_C_p(f_avg);
+        f_temp = f_in + ((q_ave * F_N_R * F_E_dH * F_E_dhm * L / 6 * φ[n_CV] *n_CV * Pi * d_cs) / (W_h * C_p));
+        err = (t_f_h[n_CV] - f_temp) / t_f_h[n_CV];
+        t_f_h[n_CV] = f_temp;
 
     } while (err > 0.001 || err < -0.001);
 }
@@ -59,11 +61,11 @@ void out_cladding_T(int n_CV)
 
     if (temp_1 < temp_2)
     {
-        t_cs_h[n_CV] = t_out_CV[n_CV] + temp_1;
+        t_cs_h[n_CV] = t_f_h[n_CV] + temp_1;
     }
     else
     {
-        t_cs_h[n_CV] = t_out_CV[n_CV] + temp_2;
+        t_cs_h[n_CV] = t_f_h[n_CV] + temp_2;
     }
 }
 
@@ -87,11 +89,27 @@ void in_cladding_T(int n_CV)
     } while (err > 0.001 || err < -0.001);
 }
 
-void out_UO2_T(int n_CV)
+void outside_UO2_T(int n_CV)
 {
 
-    // 需了解
-    double hg = 5678;
+    // hg为包壳与芯快间的气息等效传热系数取 5678 W/(m^2·°C)
+    
 
     t_u_h[n_CV] = t_ci_h[n_CV] + (  q_l_ave * F_N_R * F_E_q * φ[n_CV] /  (Pi * (d_ci+d_u)/2 * hg) );
+}
+void inside_UO2_T(int n_CV){
+    // 数据为查表所得，关键在于查找算法
+    double t_part1 = 0;
+    double t_part2 = 0;
+    double IHC = 0;
+
+    t_part1 = find_UO2_fromT(t_u_h[n_CV]);
+    printf("t_u_h:%lf--t_part1:%lf\n",t_u_h[n_CV],t_part1);
+    printf("φ[n_CV]:%lf\n",φ[n_CV]);
+    t_part2 = (q_l_ave * F_N_R * F_E_q * φ[n_CV]) /  ( 4 * Pi * 100 );
+    printf("t_part2---%lf\n",t_part2);
+    IHC = t_part1 + t_part2;
+    printf("IHN---%lf\n",IHC);
+    t_o_h[n_CV] = find_UO2_fromIHC(IHC);
+
 }
