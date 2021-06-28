@@ -29,14 +29,23 @@ double t_cs_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
 double t_ci_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
 double t_u_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
 double t_o_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
+double q_DNB_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
 
 
 double G = 0; //质量流密度   = 密度 * 流速
 double hg = 5678;
 
-#define LIM 2
-#define NUM 651
+#define LIM 8
+#define NUM 701
 double data[NUM][LIM];
 
 #define NUM_2 23
-double data_UO2[NUM_2][LIM];
+double data_UO2[NUM_2][2];
+
+double h_fs = 1629.55 * 10e3; // 15.5Mpa下的饱和水蒸汽比焓  单位J/kg 数据查表得
+// 链接 https://wenku.baidu.com/view/bbd968030975f46526d3e13e.html
+
+double h_f_in = 1268.52 * 10e3; // 15.5Mpa下进口温度287°C下的水的比焓，由软件包计算得
+
+double h_fg = 965.5 * 10e3; //15.5Mpa下的水的气化潜热 单位J/g 数据查表得
+// 链接 https://wenku.baidu.com/view/bbd968030975f46526d3e13e.html

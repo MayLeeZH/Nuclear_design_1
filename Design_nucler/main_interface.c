@@ -21,8 +21,13 @@ int main(void)
     printf("作者: 李正浩\t");
     puts(VERSION);
     printf("-Waiting-\n");
-    import_data_C_p();   
+    import_data();   
     import_data_UO2();
+
+    // double test_value = find_μ(299);
+    // printf("---%lf",test_value);
+
+
     outlet_TEMP();
     fuel_serface_info();
     pipe_info();
