@@ -35,11 +35,12 @@ void outlet_T_CV(int n_CV)
     {
         f_avg = (f_in + t_f_h[n_CV])/2;
         C_p = find_C_p(f_avg);
-        f_temp = f_in + ((q_ave * F_N_R * F_E_dH * F_E_dhm * L / 6 * φ[n_CV] *n_CV * Pi * d_cs) / (W_h * C_p));
+        f_temp = f_in + ((q_ave * F_N_R * F_E_dH * F_E_dhm * φ[n_CV] *n_CV * Pi * d_cs) / (W_h * C_p));
         err = (t_f_h[n_CV] - f_temp) / t_f_h[n_CV];
         t_f_h[n_CV] = f_temp;
 
     } while (err > 0.001 || err < -0.001);
+    printf("t_f_h[n_CV]%lf\n",t_f_h[n_CV]);
 }
 
 void out_cladding_T(int n_CV)
@@ -48,8 +49,15 @@ void out_cladding_T(int n_CV)
     double Re = 0;
     // 查表得
     double μ = find_μ(t_f_h[n_CV]);
+    printf("t_f_h[n_CV]%lf\n",t_f_h[n_CV]);
+    printf("动力粘度%lf\n",μ);
     double Pr = find_Pr(t_f_h[n_CV]);
+    printf("普朗特常数%lf\n",Pr);
     double k = find_k(t_f_h[n_CV]);
+    printf("导热系数%lf\n",k);
+
+
+
 
     double temp_1 = 0;
     double temp_2 = 0;
@@ -72,6 +80,7 @@ void out_cladding_T(int n_CV)
     {
         t_cs_h[n_CV] = t_f_h[n_CV] + temp_2;
     }
+    printf("t_cs_h[n_CV]%lf\n",t_cs_h[n_CV]);
 }
 
 void in_cladding_T(int n_CV)
@@ -81,7 +90,7 @@ void in_cladding_T(int n_CV)
     double t_avg = 0;
     double k = 0;
     double t_temp = 0;
-    // 先假设后用迭代法计算
+    // 先假设 后用迭代法计算
     t_ci_h[n_CV] = 330;
 
     do
@@ -92,24 +101,15 @@ void in_cladding_T(int n_CV)
         err = (t_ci_h[n_CV] - t_temp) / t_temp;
         t_ci_h[n_CV] = t_temp;
     } while (err > 0.001 || err < -0.001);
+    printf("t_ci_h[n_CV]%lf\n",t_ci_h[n_CV]);
 }
 
 void outside_UO2_T(int n_CV)
 {
 
     // hg为包壳与芯快间的气息等效传热系数取 5678 W/(m^2·°C)
-    
-
-    printf("t_ci_h--%lf",t_ci_h[n_CV]);
-
-    printf("t_u_h--%lf\n",t_u_h[n_CV]);
     double temp =   q_l_ave * F_N_R * F_E_q * φ[n_CV] /  (Pi * (d_ci+d_u)/2 * hg) ;
     t_u_h[n_CV] = t_ci_h[n_CV] + temp;
-    printf("temp:%lf\n",temp);
-
-    printf("t_ci_h--%lf",t_ci_h[n_CV]);
-
-    printf("t_u_h--%lf\n",t_u_h[n_CV]);
 
 }
 void inside_UO2_T(int n_CV){

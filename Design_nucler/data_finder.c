@@ -48,9 +48,12 @@ void import_data_UO2()
 
 double find_C_p(double f_avg)
 {
+
     for (int i = 0; i < (NUM - 1); i++)
     {
+        // printf("%d--%lf\n",i,f_avg);
 
+        // printf("%lf--%lf--%lf\n",data[i][0],f_avg,data[i+1][0]);
         if (f_avg > data[i][0] && f_avg < data[i + 1][0])
         {
             return 1000 * (data[i][1] + data[i + 1][1]) / 2;
@@ -70,9 +73,10 @@ double find_μ (double t_f_h){
      for (int i = 0; i < (NUM - 1); i++)
     {
 
+        printf("i%d-%lf\n",i,t_f_h);
         if (t_f_h > data[i][0] && t_f_h < data[i + 1][0])
         {
-            return (data[i][4] + data[i + 1][6]) / 2;
+            return (data[i][6] + data[i + 1][6]) / 2;
         }
         else if (t_f_h == data[i][0])
         {
