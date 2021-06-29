@@ -33,9 +33,10 @@ int main(void)
 
 
     pressureDrop();
+    show_info();
     output_info();
 
-
+    system("python3 test.py");
 
     return 0;
 }
