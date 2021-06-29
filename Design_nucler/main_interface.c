@@ -10,13 +10,13 @@
 #include "sec_2_fuel_rod.c"
 #include "sec_3_pipeInfo.c"
 #include "sec_4_CV.c"
+#include "sec_5_Pdrop.c"
 
 #define VERSION "v 0.2.12"
 
 int main(void)
 {
     printf("--------------------------压水核反应堆热工水力设计-----------------------------\n");
-    printf("作者: 李正浩\t");
     puts(VERSION);
     printf("-Waiting-\n");
     import_data();
@@ -31,7 +31,11 @@ int main(void)
         CV_info(n_CV);
     }
 
+
+    pressureDrop();
     output_info();
+
+
 
     return 0;
 }

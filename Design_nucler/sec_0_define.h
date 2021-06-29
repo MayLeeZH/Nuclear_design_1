@@ -22,6 +22,9 @@ double W_h = 0; // 单元通道内流量 kg/s
 double φ[] = {0.48, 1.02, 1.50, 1.56, 0.96, 0.68};
 double D_e = 0; //当量直径
 
+// 雷诺数
+double Re = 0;
+
 double t_f_h[6] = {0, 0, 0, 0, 0, 0};
 double t_cs_h[6] = {0, 0, 0, 0, 0, 0};
 double t_ci_h[6] = {0, 0, 0, 0, 0, 0};
@@ -47,3 +50,15 @@ double h_f_in = 1268.52 * 1000; // 15.5Mpa下进口温度287°C下的水的比�
 
 double h_fg = 965.5 * 1000; //15.5Mpa下的水的气化潜热 单位J/g 数据查表得
                             // 链接 https://wenku.baidu.com/view/bbd968030975f46526d3e13e.html
+
+
+
+// sec_5中使用
+double d_P_f = 0;
+double d_P_a = 0;
+double d_P_el = 0;
+double d_P_in = 0;
+double d_P_out = 0;
+double d_P_gr = 0;
+double d_P = 0;
+double g = 9.8;

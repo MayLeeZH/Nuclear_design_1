@@ -205,3 +205,22 @@ double find_h(double t_f_h){
     exit(EXIT_FAILURE);
 
 }
+// 通过温度查找15.5Mpa压力下对应的比容
+double find_υ(double t_f_h){
+     for (int i = 0; i < (NUM - 1); i++)
+    {
+        // 返回时即转换单位为j/kg
+        if (t_f_h > data[i][0] && t_f_h < data[i + 1][0])
+        {
+            return (data[i][7] + data[i + 1][7]) / 2   ;
+        }
+        else if (t_f_h == data[i][0])
+        {
+            return data[i][7];
+        }
+    }
+
+    printf("数据有错误，温度超出了合适的范围，导致没有比容数据匹配，程序异常结束，请检查\n");
+    exit(EXIT_FAILURE);
+
+}

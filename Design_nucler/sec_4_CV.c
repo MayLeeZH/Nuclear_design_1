@@ -58,7 +58,7 @@ void outlet_T_CV(int n_CV)
 void out_cladding_T(int n_CV)
 {
 
-    double Re = 0;
+    
     // 查表得
     double μ = find_μ(t_f_h[n_CV]);
     printf("t_f_h[n_CV]%lf\n",t_f_h[n_CV]);

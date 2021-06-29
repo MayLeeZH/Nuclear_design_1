@@ -42,8 +42,17 @@ void output_info(void)
         printf("第%d控制体出口处的UO2芯快外表面温度%lf\n", n_CV + 1, t_u_h[n_CV]);
         printf("第%d控制体出口处的UO2芯快内表面温度%lf\n", n_CV + 1, t_o_h[n_CV]);
         printf("热管中的q_DNB_h(L%d)%elf\n", n_CV + 1, q_DNB_h[n_CV]);
-        printf("DNBR%lf\n",DNBR[n_CV]);
+        printf("DNBR:%lf\n",DNBR[n_CV]);
         printf("--------------------------------------------\n");
 
     }
+
+    printf("单相流体摩擦压降: %lf Pa\n",d_P_f);
+    printf("单相流体加速压降: %lf Pa\n",d_P_a);
+    printf("单相流体提升压降: %lf Pa\n",d_P_el);
+    printf("堆芯进口局部压降: %lf Pa\n",d_P_in);
+    printf("堆芯出口局部压降: %lf Pa\n",d_P_out);
+    printf("定位格架出口压降: %lf Pa\n",d_P_gr);
+    printf("总的压降: %lf Pa\n",d_P);
+
 }
