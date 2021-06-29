@@ -11,9 +11,7 @@
 #include "sec_3_pipeInfo.c"
 #include "sec_4_CV.c"
 
-#define VERSION "v 0.2.6"
-
-
+#define VERSION "v 0.2.12"
 
 int main(void)
 {
@@ -21,8 +19,9 @@ int main(void)
     printf("作者: 李正浩\t");
     puts(VERSION);
     printf("-Waiting-\n");
-    import_data();   
+    import_data();
     import_data_UO2();
+
     outlet_TEMP();
     fuel_serface_info();
     pipe_info();
@@ -33,9 +32,6 @@ int main(void)
     }
 
     output_info();
-
-
-
 
     return 0;
 }

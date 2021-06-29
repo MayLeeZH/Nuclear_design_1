@@ -13,7 +13,7 @@ void checkinput_outT(void)
 void checkinput_out_CVT(int n_CV)
 {
     printf("假设%d控制体出口温度:\n", n_CV + 1);
-    while ((scanf("%lf", &t_f_h[n_CV]) != 1) || (t_f_h[n_CV] < 270 || t_f_h[n_CV] > 350))
+    while ((scanf("%lf", &t_f_h[n_CV]) != 1) || (t_f_h[n_CV] < 270 || t_f_h[n_CV] > 370))
     {
         printf("温度不符合，请重新输入:");
         fflush(stdin);
@@ -41,6 +41,8 @@ void output_info(void)
         printf("第%d控制体出口处的包壳内壁温%lf\n", n_CV + 1, t_ci_h[n_CV]);
         printf("第%d控制体出口处的UO2芯快外表面温度%lf\n", n_CV + 1, t_u_h[n_CV]);
         printf("第%d控制体出口处的UO2芯快内表面温度%lf\n", n_CV + 1, t_o_h[n_CV]);
+        printf("热管中的q_DNB_h(L%d)%elf\n", n_CV + 1, q_DNB_h[n_CV]);
+        printf("DNBR%lf\n",DNBR[n_CV]);
         printf("--------------------------------------------\n");
 
     }

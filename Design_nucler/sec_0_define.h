@@ -19,33 +19,31 @@ double A_b = 0; // 单元通道面积 m2
 double W_h = 0; // 单元通道内流量 kg/s
 
 //sec_4 中使用
-double φ[] = {0.80,1.02,1.50,1.56,0.96,0.48};
-double D_e = 0 ; //当量直径
+double φ[] = {0.48, 1.02, 1.50, 1.56, 0.96, 0.68};
+double D_e = 0; //当量直径
 
-
-
-double t_f_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
-double t_cs_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
-double t_ci_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
-double t_u_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
-double t_o_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
-double q_DNB_h[6] = { 0, 0 ,0 ,0 ,0 ,0};
-
+double t_f_h[6] = {0, 0, 0, 0, 0, 0};
+double t_cs_h[6] = {0, 0, 0, 0, 0, 0};
+double t_ci_h[6] = {0, 0, 0, 0, 0, 0};
+double t_u_h[6] = {0, 0, 0, 0, 0, 0};
+double t_o_h[6] = {0, 0, 0, 0, 0, 0};
+double q_DNB_h[6] = {0, 0, 0, 0, 0, 0};
+double DNBR[6] = {0, 0, 0, 0, 0, 0};
 
 double G = 0; //质量流密度   = 密度 * 流速
 double hg = 5678;
 
 #define LIM 8
-#define NUM 701
+#define NUM 1200
 double data[NUM][LIM];
 
 #define NUM_2 23
 double data_UO2[NUM_2][2];
 
-double h_fs = 1629.55 * 10e3; // 15.5Mpa下的饱和水蒸汽比焓  单位J/kg 数据查表得
+double h_fs = 1629.55 * 1000; // 15.5Mpa下的饱和水蒸汽比焓  单位J/kg 数据查表得
 // 链接 https://wenku.baidu.com/view/bbd968030975f46526d3e13e.html
 
-double h_f_in = 1268.52 * 10e3; // 15.5Mpa下进口温度287°C下的水的比焓，由软件包计算得
+double h_f_in = 1268.52 * 1000; // 15.5Mpa下进口温度287°C下的水的比焓，由软件包计算得
 
-double h_fg = 965.5 * 10e3; //15.5Mpa下的水的气化潜热 单位J/g 数据查表得
-// 链接 https://wenku.baidu.com/view/bbd968030975f46526d3e13e.html
+double h_fg = 965.5 * 1000; //15.5Mpa下的水的气化潜热 单位J/g 数据查表得
+                            // 链接 https://wenku.baidu.com/view/bbd968030975f46526d3e13e.html

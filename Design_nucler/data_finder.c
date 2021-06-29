@@ -72,8 +72,6 @@ double find_μ (double t_f_h){
 
      for (int i = 0; i < (NUM - 1); i++)
     {
-
-        printf("i%d-%lf\n",i,t_f_h);
         if (t_f_h > data[i][0] && t_f_h < data[i + 1][0])
         {
             return (data[i][6] + data[i + 1][6]) / 2;
@@ -165,4 +163,45 @@ double find_UO2_fromIHC(double IHC)
     }
     printf("数据有错误，导致积分热导率超出表的范围，请检查");
     exit(EXIT_FAILURE);
+}
+
+
+// 查找15.5Mpa压力下水的密度
+double find_ρ(double t_f_h){
+     for (int i = 0; i < (NUM - 1); i++)
+    {
+        // 通过返回比容的倒数获得密度
+        if (t_f_h > data[i][0] && t_f_h < data[i + 1][0])
+        {
+            return  1 / ((data[i][7] + data[i + 1][7]) / 2)   ;
+        }
+        else if (t_f_h == data[i][0])
+        {
+            return 1 / data[i][7];
+        }
+    }
+
+    printf("数据有错误，温度超出了合适的范围，导致没有密度数据匹配，程序异常结束，请检查\n");
+    exit(EXIT_FAILURE);
+
+}
+
+// 查找15.5Mpa压力下水的比焓
+double find_h(double t_f_h){
+     for (int i = 0; i < (NUM - 1); i++)
+    {
+        // 返回时即转换单位为j/kg
+        if (t_f_h > data[i][0] && t_f_h < data[i + 1][0])
+        {
+            return   1000 * (data[i][2] + data[i + 1][2]) / 2   ;
+        }
+        else if (t_f_h == data[i][0])
+        {
+            return  1000 * data[i][2];
+        }
+    }
+
+    printf("数据有错误，温度超出了合适的范围，导致没有比焓数据匹配，程序异常结束，请检查\n");
+    exit(EXIT_FAILURE);
+
 }

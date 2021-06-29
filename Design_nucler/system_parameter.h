@@ -1,5 +1,5 @@
 // 系统参量
-#define P 15.8 //Mpa
+#define P 15.5 //Mpa
 #define Nt 1820                //MW
 #define W_t_h 32100            //t/h
 #define f_in 287               // °C
