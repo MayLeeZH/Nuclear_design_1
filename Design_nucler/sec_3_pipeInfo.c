@@ -2,7 +2,7 @@
 void pipe_info(void)
 {
 
-    double v_f = 0; // 查标得
+    double v_f = 0; // 查表得
     double ρ_f = 0; //平均密度
     double f_avg = 0;
     f_avg = (f_out_S + f_in) / 2;

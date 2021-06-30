@@ -79,7 +79,7 @@ void output_info(void)
         fprintf(fp,"%lf\n", t_ci_h[n_CV]);
         fprintf(fp,"%lf\n", t_u_h[n_CV]);
         fprintf(fp,"%lf\n", t_o_h[n_CV]);
-        fprintf(fp,"%lf\n", q_DNB_h[n_CV]);
+        fprintf(fp,"%lf\n", q_DNB_h[n_CV]/1e6);
         fprintf(fp,"%lf\n", DNBR[n_CV]);
     }
 

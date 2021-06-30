@@ -1,4 +1,5 @@
 // 核反应堆热工分析
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "math.h"
@@ -16,27 +17,18 @@
 
 int main(void)
 {
-    printf("--------------------------压水核反应堆热工水力设计-----------------------------\n");
-    puts(VERSION);
-    printf("-Waiting-\n");
     import_data();
     import_data_UO2();
-
     outlet_TEMP();
     fuel_serface_info();
     pipe_info();
-
     for (int n_CV = 0; n_CV < s_CV; n_CV++)
     {
         CV_info(n_CV);
     }
-
-
     pressureDrop();
-    show_info();
     output_info();
-
-    system("python3 test.py");
-
+    show_info();
+    // system("python3 data_export.py");
     return 0;
 }

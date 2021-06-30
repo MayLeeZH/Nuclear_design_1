@@ -31,28 +31,26 @@ void outlet_T_CV(int n_CV)
     double f_avg = 0;
     double f_temp = 0;
 
+        double t_in = 0;
+        if (n_CV == 0){
+            t_in = f_in;
+        }
+        else
+        {
+            t_in = t_f_h[n_CV - 1];
+        }
+        
     // 假设控制体的出口温度进行迭代计算
     checkinput_out_CVT(n_CV);
     do
     {
-
-        if (n_CV == 0)
-        {
-            f_avg = (f_in + t_f_h[n_CV])/2;
-        }
-        else
-        {
-            f_avg = (t_f_h[n_CV - 1] + t_f_h[n_CV])/2;
-        }
-        
-        printf("%lf\n",f_avg);
+        f_avg = (t_in + t_f_h[n_CV])/2;
         C_p = find_C_p(f_avg);
-        f_temp = f_in + ((q_ave * F_N_R * F_E_dH * F_E_dhm * φ[n_CV] *n_CV * Pi * d_cs) / (W_h * C_p));
+        f_temp = t_in + ((q_ave * F_N_R * F_E_dH * F_E_dhm * φ[n_CV] * L/s_CV * Pi * d_cs) / (W_h * C_p));
         err = (t_f_h[n_CV] - f_temp) / t_f_h[n_CV];
         t_f_h[n_CV] = f_temp;
 
     } while (err > 0.001 || err < -0.001);
-    printf("t_f_h[n_CV]%lf\n",t_f_h[n_CV]);
 }
 
 void out_cladding_T(int n_CV)
@@ -61,15 +59,8 @@ void out_cladding_T(int n_CV)
     
     // 查表得
     double μ = find_μ(t_f_h[n_CV]);
-    printf("t_f_h[n_CV]%lf\n",t_f_h[n_CV]);
-    printf("动力粘度%lf\n",μ);
     double Pr = find_Pr(t_f_h[n_CV]);
-    printf("普朗特常数%lf\n",Pr);
     double k = find_k(t_f_h[n_CV]);
-    printf("导热系数%lf\n",k);
-
-
-
 
     double temp_1 = 0;
     double temp_2 = 0;
@@ -94,7 +85,6 @@ void out_cladding_T(int n_CV)
         t_cs_h[n_CV] = t_f_h[n_CV] + temp_2;
 
     }
-    printf("t_cs_h[n_CV]%lf\n",t_cs_h[n_CV]);
 }
 
 void in_cladding_T(int n_CV)
@@ -115,7 +105,6 @@ void in_cladding_T(int n_CV)
         err = (t_ci_h[n_CV] - t_temp) / t_temp;
         t_ci_h[n_CV] = t_temp;
     } while (err > 0.001 || err < -0.001);
-    printf("t_ci_h[n_CV]%lf\n",t_ci_h[n_CV]);
 }
 
 void outside_UO2_T(int n_CV)
@@ -132,35 +121,22 @@ void inside_UO2_T(int n_CV){
     double t_part2 = 0;
     double IHC = 0;
 
-
-    
-
     t_part1 = find_UO2_fromT(t_u_h[n_CV]);
-    printf("--\n");
     t_part2 = (q_l_ave * F_N_R * F_E_q * φ[n_CV]) /  ( 4 * Pi * 100 );
     IHC = t_part1 + t_part2;
     t_o_h[n_CV] = find_UO2_fromIHC(IHC);
-    printf("--\n");
-
 }
 
 void get_q_DNBh(int n_CV){
 
     double h = find_h(t_f_h[n_CV]);
-
-
     double ρ = find_ρ(t_f_h[n_CV]);
     double x_e = (h - h_fs) / h_fg;
     double G = ρ * V * 3600;
-    printf("G:%lf\n",G);
-    printf("x_e%lf\n",x_e);
     double part_1 = (2.022 -  (6.238 * 1e-8 * P * 1000000) ) + (0.1722 - (1.43 * 1e-8 * P * 1000000) ) * exp(  (  18.177 - 5.987 * 1e-7 * P*  1000000) * x_e );
     double part_2 = (0.1484 - 1.596 * x_e + 0.1729 * x_e * fabs(x_e) ) * (0.2049 * G / 1e6) + 1.037;
     double part_3 = (1.157 - 0.869 * x_e) * (0.2664 + 0.8357 * exp(-124 * D_e)) * (0.8258 + 0.341 *(h_fs - h_f_in) / 1e6 );
     q_DNB_h[n_CV] = 3.154 * 1e6 * part_1 * part_2 * part_3;
-    printf("part_1: %lf\n",part_1);
-    printf("part_2: %lf\n",part_2);
-    printf("part_3: %lf\n",part_3);
 }
 void get_DNBR(int n_CV){
     DNBR[n_CV] = q_DNB_h[n_CV] / (q_ave * F_N_R * F_E_q * φ[n_CV]);

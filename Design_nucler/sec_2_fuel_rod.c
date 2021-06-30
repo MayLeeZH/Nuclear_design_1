@@ -1,5 +1,3 @@
-// #include "system_parameter.h"
-
 void fuel_serface_info(void)
 {
     F_total = m * n * d_cs * L * Pi;
