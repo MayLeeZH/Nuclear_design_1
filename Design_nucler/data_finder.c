@@ -31,7 +31,7 @@ void import_data_UO2()
     FILE *fp;
     double ch;
 
-    if ((fp = fopen("data_UO2", "r")) == NULL)
+    if ((fp = fopen("data_UO2.txt", "r")) == NULL)
     {
         printf("有关UO2积分热导率的数据打开失败，请检查数据文件是否存在，文件名是否更改");
         exit(EXIT_FAILURE);

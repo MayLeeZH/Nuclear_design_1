@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+=# -*- coding: utf-8 -*-
 import xlwings as xw
 # 读取result.txt中的计算结果
 def loadDatadet(infile,k):
